@@ -22,10 +22,11 @@ sudo chmod +x $TOMCAT_HOME/bin/*.sh
 
 brew install tomcat-native
 brew ls tomcat-native
-echo 'export PATH="/usr/local/opt/apr/bin:$PATH"' >> ~/.bash_profile
 
-vi $TOMCAT_HOME/bin/setenv.sh
-CATALINA_OPTS="$CATALINA_OPTS -Djava.library.path=/usr/local/opt/tomcat-native/lib"
+echo 'export PATH="/usr/local/opt/apr/bin:$PATH"' >> ~/.bash_profile
+echo 'export CATALINA_OPTS="$CATALINA_OPTS -Djava.library.path=/usr/local/opt/tomcat-native/lib"' >> $TOMCAT_HOME/bin/setenv.sh
+echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/opt/tomcat-native/lib"' >> $TOMCAT_HOME/bin/setenv.sh
+
 chmod 755 $TOMCAT_HOME/bin/setenv.sh
 
-./catalina.sh configtest | grep APR
+$TOMCAT_HOME/bin/catalina.sh configtest | grep APR

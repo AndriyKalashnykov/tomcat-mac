@@ -5,7 +5,7 @@ sdk use java 8.0.232.hs-adpt
 
 TOMCAT_HOME=/Library/Tomcat
 
-$TOMCAT_HOME/bin/shutdown.sh
+export JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addressess=true -Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8 -XX:+UnlockExperimentalVMOptions -XX:MinRAMPercentage=50.0 -XX:MaxRAMPercentage=90.0"
 
 rm -rf $TOMCAT_HOME/webapps/ROOT
 rm -f $TOMCAT_HOME/webapps/ROOT.war
@@ -21,4 +21,5 @@ rm -f $TOMCAT_HOME/logs/*.*
 
 $TOMCAT_HOME/bin/startup.sh
 
-while ! tail -f $TOMCAT_HOME/logs/catalina.*.log ; do sleep 1 ; done
+cat $TOMCAT_HOME/logs/catalina.out
+while ! tail -f $TOMCAT_HOME/logs/catalina.out; do sleep 1 ; done

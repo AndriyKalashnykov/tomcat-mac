@@ -3,4 +3,4 @@
 TOMCAT_HOME=/Library/Tomcat
 
 $TOMCAT_HOME/bin/shutdown.sh
-$TOMCAT_HOME/bin/startup.sh
+
