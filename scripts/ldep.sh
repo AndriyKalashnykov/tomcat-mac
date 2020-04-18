@@ -1,0 +1,24 @@
+#!/bin/bash
+
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk use java 8.0.232.hs-adpt
+
+TOMCAT_HOME=/Library/Tomcat
+
+$TOMCAT_HOME/bin/shutdown.sh
+
+rm -rf $TOMCAT_HOME/webapps/ROOT
+rm -f $TOMCAT_HOME/webapps/ROOT.war
+
+cd ~/projects/tomcat-root-war/
+mvn clean install -DskipUiTests -Dmaven.test.skip=true
+cp ~/projects/tomcat-root-war/target/ROOT.war $TOMCAT_HOME/webapps
+
+# wget https://github.com/AndriyKalashnykov/tomcat-root-war/releases/download/1.0.0/ROOT.war
+# mv ROOT.war $TOMCAT_HOME/webapps
+
+rm -f $TOMCAT_HOME/logs/*.*
+
+$TOMCAT_HOME/bin/startup.sh
+
+while ! tail -f $TOMCAT_HOME/logs/catalina.*.log ; do sleep 1 ; done
