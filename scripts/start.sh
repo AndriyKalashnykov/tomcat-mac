@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 sdk use java 8.0.232.hs-adpt
 
