@@ -2,8 +2,6 @@
 
 ## APR + SSL
 
-https://confluence.eng.vmware.com/pages/viewpage.action?pageId=374637441
-
 vi $CATLINA_HOME/conf/server.xml
 
 ```xml
